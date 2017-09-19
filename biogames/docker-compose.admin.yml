@@ -1,0 +1,20 @@
+version: "3"
+services:
+ web:
+  entrypoint: "bash"
+  command: ""
+  volumes:
+   - ./admin/web/:/mnt/
+
+ celery:
+  entrypoint: "bash"
+  command: ""
+  volumes:
+   - ./admin/celery/:/mnt/
+
+ db:
+  entrypoint: "bash"
+  command: ""
+  volumes:
+   - ./admin/db/:/mnt/
+  

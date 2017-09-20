@@ -19,4 +19,4 @@ Usage
 Requirements
 
 * docker (1.13.0+)
-* docker-compose (1.8.0+)
+* docker-compose (1.10.0+)

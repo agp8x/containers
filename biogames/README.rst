@@ -34,13 +34,14 @@ Preparation for production:
 
 * See *biogames/INSTALL.txt*
 * Especially collectstatic and compilemessages
-* Environment, dependencies and service management is maintained by docker-compose
+* Environment, dependencies and service management is handled by docker-compose
 
 
 Operational Handling
 --------------------
 
 
+* Scale celery-workers: `docker-compose scale celery=5`
 * Start: `docker-compose up -d`
 * Shutdown: `docker-compose down`
 * Maintenance (Django)
@@ -51,4 +52,4 @@ Operational Handling
 		3. `os.system("bash")`
 
 * Admin: `docker-compose -f docker-compose.yml -f docker-compose.admin.yml run {web,celery,db}`
-	* maps */mnt* to *admin/{web,celery,db}*
+	* mounts */mnt* (containers) to *admin/{web,celery,db}* (host)

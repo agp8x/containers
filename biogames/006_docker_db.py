@@ -12,7 +12,6 @@ DATABASES = {
 		'HOST':		'db', #biogames_postgis
 		'PORT':		'5432',
 		'NAME':		'postgres',
-		#'NAME':		'postgres',
 		'USER':		'postgres',
 		'PASSWORD':	'secret',
 		'ATOMIC_REQUESTS': True,

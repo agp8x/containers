@@ -1,0 +1,30 @@
+version: "2"
+
+services:
+ db:
+  image: influxdb:1.3-alpine
+  volumes:
+   - ./data/influx/db:/var/lib/influxdb
+   - ./conf/influx/collectd:/usr/share/collectd/:ro
+  ports:
+   - "8086:8086"
+   - "25826:25826/udp"
+   - "2003:2003"
+  env_file: variables.env
+ graph:
+  image: grafana/grafana
+  volumes:
+   - ./data/grafana/lib/:/var/lib/grafana
+   - ./data/grafana/log/:/var/log/grafana
+   - ./conf/grafana/:/etc/grafana
+  ports:
+   - 3000:3000
+  env_file: variables.env
+ collectd:
+  build: collectd
+  privileged: true
+  volumes:
+   - ./conf/collectd/:/etc/collectd/
+   - "/proc/:/mnt/proc/:ro"
+   - "/:/mnt/host:ro"
+   - "/var/run/docker.sock:/var/run/docker.sock"

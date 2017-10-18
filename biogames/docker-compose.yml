@@ -3,7 +3,7 @@ version: "3"
 services:
  web:
   build: ./docker2
-  image: biogames:python2
+  image: docker.clkl.de/kinf/biogames:python2
   volumes:
    - ./biogames:/biogames
    - ../gamefield/:/gamefield
@@ -17,7 +17,7 @@ services:
    - db
 
  celery:
-  image: biogames:python2
+  image: docker.clkl.de/kinf/biogames:python2
   volumes:
    - ./biogames:/biogames
    - ./venv_celery/:/venv/

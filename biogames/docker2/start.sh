@@ -10,5 +10,5 @@ until pg_isready -qh db; do
 	echo "Waiting for Postgres@db…";
 	sleep 1;
 done
-
-/biogames/manage.py $@
+cd /biogames;
+./manage.py $@;

@@ -8,8 +8,8 @@ services:
    - ./biogames:/biogames
    - ../gamefield/:/gamefield
    - ./venv_web/:/venv/
-   #- ./gg-data/files/:/biogames/files/
-   #- ./gg-data/media/:/biogames/media/
+   - ./gg-data/files/:/biogames/files/
+   - ./gg-data/media/:/biogames/media/
   ports:
    - "5000:8000"
   restart: on-failure:5
@@ -21,6 +21,8 @@ services:
   volumes:
    - ./biogames:/biogames
    - ./venv_celery/:/venv/
+   - ./gg-data/files/:/biogames/files/
+   - ./gg-data/media/:/biogames/media/
   restart: on-failure:5
   command: ["celery", "worker"]
   depends_on:

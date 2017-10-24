@@ -29,7 +29,7 @@ services:
    - db
 
  db:
-  image: mdillon/postgis
+  image: docker.clkl.de/postgis:9.6-alpine
   volumes:
    - ./postgres/:/var/lib/postgresql/data
   environment:

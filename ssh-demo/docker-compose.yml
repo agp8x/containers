@@ -1,0 +1,7 @@
+version: '2'
+services:
+ demo:
+  image: ssh-demo
+  build: .
+  ports:
+   - "2222:22"

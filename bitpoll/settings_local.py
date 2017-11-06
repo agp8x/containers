@@ -62,34 +62,39 @@ HOME_URL_NAME = "Dashboard"
 #GROUP_MANAGEMENT = REGISTER_ENABLED
 
 ## Use ldap login
-#import ldap
-#from django_auth_ldap.config import LDAPSearch
-#
-#AUTHENTICATION_BACKENDS = (
-#    'django_auth_ldap.backend.LDAPBackend',
-#    'django.contrib.auth.backends.ModelBackend',
-#    )
-#
-#AUTH_LDAP_SERVER_URI = "ldap_host"
-#AUTH_LDAP_BIND_DN = "ldap_bind_dn"
-#AUTH_LDAP_BIND_PASSWORD = "ldap_bind_pw"
-#AUTH_LDAP_USER_SEARCH = LDAPSearch("ou=People,dc=mafiasi,dc=de",
-#    ldap.SCOPE_SUBTREE, "(uid=%(user)s)")
-#AUTH_LDAP_ALWAYS_UPDATE_USER = True
-#
-#from django_auth_ldap.config import LDAPSearch, PosixGroupType
-#
-#AUTH_LDAP_GROUP_SEARCH = LDAPSearch("ou=groups,dc=mafiasi,dc=de",
-#    ldap.SCOPE_SUBTREE, "(objectClass=posixGroup)"
-#    )
-#AUTH_LDAP_GROUP_TYPE = PosixGroupType()
-##AUTH_LDAP_FIND_GROUP_PERMS = True
-#AUTH_LDAP_MIRROR_GROUPS = True
-#
-#AUTH_LDAP_USER_ATTR_MAP = {"first_name": "givenName", "last_name": "sn", "email": "mail"}
-#
+import ldap
+from django_auth_ldap.config import LDAPSearch
+
+AUTHENTICATION_BACKENDS = (
+    'django_auth_ldap.backend.LDAPBackend',
+    'django.contrib.auth.backends.ModelBackend',
+    )
+
+AUTH_LDAP_SERVER_URI = "ldap://ldap.wiai.de/"
+AUTH_LDAP_BIND_DN = "ldap_bind_dn"
+AUTH_LDAP_BIND_PASSWORD = "ldap_bind_pw"
+AUTH_LDAP_USER_SEARCH = LDAPSearch("ou=people,ou=fswiai,dc=ldap,dc=wiai,dc=de",
+    ldap.SCOPE_SUBTREE, "(uid=%(user)s)")
+AUTH_LDAP_ALWAYS_UPDATE_USER = True
+
+from django_auth_ldap.config import LDAPSearch, PosixGroupType
+
+AUTH_LDAP_GROUP_SEARCH = LDAPSearch("ou=people,ou=fswiai,dc=ldap,dc=wiai,dc=de",
+    ldap.SCOPE_SUBTREE, "(objectClass=posixGroup)"
+    )
+AUTH_LDAP_GROUP_TYPE = PosixGroupType()
+#AUTH_LDAP_FIND_GROUP_PERMS = True
+AUTH_LDAP_MIRROR_GROUPS = True
+
+AUTH_LDAP_USER_ATTR_MAP = {"first_name": "givenName", "last_name": "sn", "email": "mail"}
+
 #AUTH_LDAP_USER_FLAGS_BY_GROUP = {
 #    "is_staff": ["cn=Editoren,ou=groups,dc=mafiasi,dc=de",
 #                 "cn=Server-AG,ou=groups,dc=mafiasi,dc=de"],
 #    "is_superuser": "cn=Server-AG,ou=groups,dc=mafiasi,dc=de"
 #}
+import logging
+
+logger = logging.getLogger('django_auth_ldap')
+logger.addHandler(logging.StreamHandler())
+logger.setLevel(logging.DEBUG)

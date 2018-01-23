@@ -1,0 +1,35 @@
+version: "3"
+
+#networks:
+# backend:
+#  external:
+#   name: caddy_backend
+# db_net:
+#  external:
+#   name: db_net
+
+services:
+ bitpoll:
+  build: .
+  image: bitpoll
+  ports:
+   - "8080:80"
+  restart: on-failure:5
+  depends_on:
+   - dbbitpoll
+  volumes:
+   - ./settings_local.py:/Bitpoll/bitpoll/settings_local.py:ro
+#  networks:
+#   - backend
+#   - db_net
+
+
+ dbbitpoll:
+  image: mariadb:10.1.22
+  restart: on-failure:5
+  env_file:
+   - docker.env
+#  networks:
+#   - db_net
+  volumes:
+   - ./mysql:/var/lib/mysql

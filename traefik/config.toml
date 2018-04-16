@@ -1,0 +1,7 @@
+[web]
+address = ":8080"
+
+[docker]
+domain = "lolnope.wiai.de"
+watch = true
+exposedbydefault = false

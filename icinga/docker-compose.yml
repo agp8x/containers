@@ -1,0 +1,31 @@
+version: "3"
+
+services:
+ icinga:
+  image: docker.clkl.de:443/srv/icinga:0.1
+  build: ./app
+  volumes:
+   - ./data/icinga/etc/:/etc/icinga2
+   - ./data/icinga/var/:/var/lib/icinga2
+  env_file: postgres.env
+  ports:
+   - 5665:5665
+  restart: always
+
+ icingaweb:
+  image: docker.clkl.de:443/srv/icingaweb:0.1
+  build: ./web
+  volumes:
+   - ./data/icinga/etc/:/etc/icinga2
+   - ./data/web/etc/:/etc/icingaweb2
+   - ./data/web/apache.conf:/etc/apache2/conf.d/icingaweb2.conf
+  ports:
+   - 8080:80
+  restart: on-failure:5
+
+ db:
+  image: postgres:10-alpine
+  volumes:
+   - ./data/postgres:/var/lib/postgresql/data
+  env_file: postgres.env
+  restart: on-failure:5

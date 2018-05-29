@@ -5,3 +5,22 @@ address = ":8080"
 domain = "lolnope.wiai.de"
 watch = true
 exposedbydefault = false
+
+
+[entryPoints]
+	[entryPoints.http]
+		address = ":80"
+		[entryPoints.http.redirect]
+			entryPoint = "https"
+	[entryPoints.https]
+		address = ":443"
+		[entryPoints.https.tls]
+
+
+[acme]
+	email = "tls-admin@example.org"
+	storage = "acme.json"
+	entryPoint = "https"
+	OnHostRule = true
+	[acme.httpChallenge]
+		entryPoint = "http"

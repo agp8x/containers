@@ -7,6 +7,8 @@ watch = true
 exposedbydefault = false
 
 
+defaultEntryPoints = ["https", "http"]
+
 [entryPoints]
 	[entryPoints.http]
 		address = ":80"

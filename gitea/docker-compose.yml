@@ -1,12 +1,12 @@
-version: "3"
+version: "2"
 
 services:
     gogs:
-        image: gogs/gogs
+        image: gitea/gitea
         ports:
-            - "10022:22"
+            - "10023:22"
         volumes:
-            - ./gogs/:/data
+            - ./gitea/:/data
         restart: on-failure:5
         networks:
          - traefik_net
@@ -16,6 +16,7 @@ services:
          - "traefik.port=3000"
          - "traefik.docker.network=traefik_net"
          - "traefik.host.frontend.rule=Host:git.horst"
+         - "traefik.url.frontend.rule=Host:git.srv.test.wiai.de"
     db:
         image: postgres:10-alpine
         volumes:
@@ -27,5 +28,3 @@ networks:
  traefik_net:
   external:
    name: traefik_net
- default:
-  driver: bridge

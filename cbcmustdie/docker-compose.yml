@@ -1,0 +1,13 @@
+{
+  "version": "3",
+  "services": {
+    "cbcmustdie": {
+      "build": "src",
+      "image": "docker.clkl.de/minictf/cbcmustdie:0.1",
+      "ports": [
+        "8080:5000"
+      ],
+      "labels": []
+    }
+  }
+}

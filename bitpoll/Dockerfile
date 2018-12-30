@@ -2,12 +2,12 @@ FROM alpine:3.6
 
 EXPOSE 80
 ADD ["sass.sh", "settings_local.build.py", "/"]
-RUN apk add --update python3 python3-dev git g++ nodejs-npm mariadb-dev mariadb-client-libs \
+RUN apk add --update python3 python3-dev git g++ nodejs-npm mariadb-dev mariadb-client-libs openldap-dev \
  && ln -s /sass.sh /usr/bin/sass \
  && git clone https://github.com/fsinfuhh/Bitpoll \
  && rm -r /Bitpoll/.git \
  && pip3 install -r /Bitpoll/requirements.txt \
- && pip3 install pyscss mysqlclient \
+ && pip3 install pyscss mysqlclient django_auth_ldap \
  && npm install --global coffeescript \
  && cd /Bitpoll \
  && mv /settings_local.build.py /Bitpoll/bitpoll/settings_local.py \

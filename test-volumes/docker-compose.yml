@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+ app:
+  build: .
+  image: docker.clkl.de/docker/test-vols:0.0
+  command: python3 -c "import os;os.system('cat /test/pointer')"
+  volumes:
+   - ./:/app
+   - test:/test
+
+volumes:
+ test:
